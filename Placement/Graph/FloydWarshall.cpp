@@ -1,4 +1,4 @@
-//Floyd Warshall  All Pair Shortest Path in O(V3).
+//Floyd Warshall  All Pair Shortest Path in O(V3). Also Checking Negative Cycle Present or not.
 #include<bits/stdc++.h>
 #define INF 99
 using namespace std;
@@ -29,7 +29,23 @@ int main()
             }
         }
     }
-
+    int f=0;
+    for(i=0;i<v;i++)
+    {
+        for(j=0;j<v;j++)
+        {
+            if(d[i][j]<0)
+            {
+                f=1;
+                goto a;
+            }
+        }
+    }
+    a:
+    if(f==1)
+        cout<<"Negative Cycle is Present\n";
+    else
+        cout<<"Negative Cycle is not Present\n";
     //Printing all shortest Path
     for(i=0;i<v;i++)
     {
