@@ -1,11 +1,12 @@
 //Dijkstra Algorithm using set  TC -> O(E log V) // undirected graph.
+//Along with printing shortest path
 #include<bits/stdc++.h>
 #define pairs pair<int,int>
 #define ll long long
 using namespace std;
 ll d[100005];
 list<pairs> *g;
-
+ll parent[100005];
 void dijkstra(int root)
 {
     int u,v,wt;
@@ -26,10 +27,18 @@ void dijkstra(int root)
             if(d[v]>d[u]+wt)
             {
                 d[v]=d[u]+wt;
+                parent[v]=u;
                 s.insert({d[v],v});
             }
         }
     }
+}
+void printPath(int j)
+{
+    cout<<j<<" ";
+    if(parent[j]==-1)
+        return;
+    printPath(parent[j]);
 }
 void addEdge(int src,int dest,int wt)
 {
@@ -47,6 +56,7 @@ void addEdge(int src,int dest,int wt)
 }
 int main()
 {
+    parent[0]=-1;
     int i,t;
     cin>>t;
     while(t--)
@@ -65,10 +75,13 @@ int main()
         int x,y;
         cin>>x>>y;
         dijkstra(x);
+        cout<<"Path from dest to src: ";
+        printPath(y);
+        cout<<endl;
         if(d[y]!=INT_MAX)
-            cout<<d[y]<<endl;
+            cout<<"Shortest Distance: "<<d[y]<<endl;
         else
-            cout<<"NO"<<endl;
+            cout<<"Shortest Distance: INF"<<endl;
     }
     return 0;
 }
