@@ -1,7 +1,8 @@
 //Longest Increasing Subsequence
 #include<bits/stdc++.h>
+#define int long long 
 using namespace std;
-int main()
+int32_t main()
 {
     int n;
     cin>>n;
